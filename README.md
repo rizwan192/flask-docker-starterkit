@@ -1,6 +1,6 @@
 # 🌶️ flask-docker-starterkit
 
-A simple starterkit providing everything you need to start a new `flask` project
+A simple boilerplate providing a complete setup to start a new `flask` project
 
 ## 🧰 Build the image
 
