@@ -20,6 +20,18 @@ docker-compose up flaskdockerstarterkit
 
 The project will be available on the following URI: `http://127.0.0.1:5000`
 
+## 🐛 Run the image with VSCode debugger
+
+To run the image with the VSCode debugger please follow these steps:
+
+- Run the command `docker-compose up debugger` in your terminal
+- Go to VSCode `Run and Debug` Section
+- Select the `▶️` button with the option `Python: Remote Attach`
+
+And the project will start successfully 🚀
+
+Note: `debugpy` will wait for the VSCode debugger to attach before running the `flask` server
+
 ## 🧪 Run tests
 
 To run the tests, please run the following command in your terminal:
@@ -38,4 +50,5 @@ You can refer to the `.env.example` file
 
 - Up and running `flask` server
 - Containerized application
-- Unit tests (in progress)
+- Unit tests
+- VSCode debugger with hot reload
