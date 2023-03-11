@@ -9,10 +9,14 @@ class TestAuthRoutes(unittest.TestCase):
         self.client = create_app().test_client()
 
     def test_auth_global_endpoint(self):
-        print("DO YOU SEE ME ?")
-        auth_endpoint_request = self.client.get('/api/auth/')
-        self.assertDictEqual(auth_endpoint_request.json, {
-            "message": "Welcome to your awesome auth endpoint", "succes": True})
+        try:
+            auth_endpoint_request = self.client.get('/api/auth/')
+            self.assertDictEqual(auth_endpoint_request.json, {
+                "message": "Welcome to your awesome auth endpoint", "succes": True})
+        except ValueError:
+            raise SystemExit(ValueError)
+
+
 
 
 if __name__ == '__main__':
