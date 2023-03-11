@@ -1,6 +1,6 @@
 # flask-docker-starterkit
 
-A simple `flask` starterkit providing everything you need to start a new `flask` project
+A simple starterkit providing everything you need to start a new `flask` project
 
 ## Build the image
 
