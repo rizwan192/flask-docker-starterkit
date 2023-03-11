@@ -1,5 +1,5 @@
 # For more information, please refer to https://aka.ms/vscode-docker-python
-FROM python:3.10-slim
+FROM python:3.10-slim as base
 
 EXPOSE 5000
 
@@ -21,6 +21,23 @@ COPY . /flask_starterkit
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /flask_starterkit
 USER appuser
 
+# Degguer config
+FROM base as debugger
+
+RUN pip install debugpy
+
+CMD ["python", "-m", "debugpy", "--listen", "0.0.0.0:10001", "--wait-for-client", "-m", "flask", "run", "-h","0.0.0.0" , "-p","5000"]
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 # CMD ["gunicorn", "--bind", "0.0.0.0:5002", "run:app"]
+
+# Flask server in dev mode
+FROM base as debug
 CMD ["flask", "run", "--host", "0.0.0.0"]
+
+FROM base as test
+CMD ["python","-m","pytest"]
+# Production image
+FROM base as prod
+
+CMD ["flask", "run", "--host", "0.0.0.0"]
+
