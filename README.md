@@ -17,3 +17,7 @@ To run the image in a docker container, simply open a terminal and run the follo
 ```bash
 docker-compose up flaskdockerstarterkit
 ```
+
+## Features
+
+- Up and running `flask` server
