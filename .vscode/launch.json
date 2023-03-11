@@ -10,12 +10,12 @@
             "request": "attach",
             "connect": {
                 "host": "localhost",
-                "port": 10001
+                "port": 5678
             },
             "pathMappings": [
                 {
                     "localRoot": "${workspaceFolder}",
-                    "remoteRoot": "/flask_starterkit/main"
+                    "remoteRoot": "/flask_starterkit"
                 }
             ],
             "justMyCode": true

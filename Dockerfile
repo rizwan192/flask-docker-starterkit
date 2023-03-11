@@ -26,7 +26,7 @@ FROM base as debugger
 
 RUN pip install debugpy
 
-CMD ["python", "-m", "debugpy", "--listen", "0.0.0.0:10001", "--wait-for-client", "-m", "flask", "run", "-h","0.0.0.0" , "-p","5000"]
+CMD ["python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "-m", "flask", "run", "-h","0.0.0.0" , "-p","5000"]
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 # CMD ["gunicorn", "--bind", "0.0.0.0:5002", "run:app"]
 
