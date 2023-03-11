@@ -1,4 +1,4 @@
-from flask_starterkit.app import flask_app
+from flask_starterkit.main.app import flask_app
 from dotenv import load_dotenv
 
 if __name__ == "__main__":
