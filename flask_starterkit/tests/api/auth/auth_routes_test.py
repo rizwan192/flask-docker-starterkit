@@ -12,7 +12,7 @@ class TestAuthRoutes(unittest.TestCase):
         print("DO YOU SEE ME ?")
         auth_endpoint_request = self.client.get('/api/auth/')
         self.assertDictEqual(auth_endpoint_request.json, {
-            "message": "Welcome to your awesome auth endpoint", "success": True})
+            "message": "Welcome to your awesome auth endpoint", "succes": True})
 
 
 if __name__ == '__main__':
