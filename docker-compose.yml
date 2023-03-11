@@ -1,0 +1,33 @@
+version: '3.4'
+
+services:
+  flaskdockerstarterkit:
+    image: flaskdockerstarterkit
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: debug
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/flask_starterkit:cached
+    env_file: .env
+  debugger:
+    image: debugger
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: debugger
+    ports:
+      - 5000:5000
+      - 5678:5678
+    volumes:
+      - .:/flask_starterkit:cached
+    env_file: .env
+  test-runner:
+    image: test-runner
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: test
+    env_file: .env
