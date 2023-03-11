@@ -19,6 +19,8 @@ To run the image in a docker container, simply open a terminal and run the follo
 docker-compose up flaskdockerstarterkit
 ```
 
+The project will be available on the following URI: `http://127.0.0.1:5000`
+
 ## Features
 
 - Up and running `flask` server
