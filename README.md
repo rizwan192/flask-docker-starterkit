@@ -50,4 +50,5 @@ You can refer to the `.env.example` file
 
 - Up and running `flask` server
 - Containerized application
-- Unit tests (in progress)
+- Unit tests
+- VSCode debugger with hot reload
