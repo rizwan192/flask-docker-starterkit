@@ -30,7 +30,7 @@ To run the image with the VSCode debugger please follow these steps:
 
 And the project will start successfully 🚀
 
-Note: `debugpy` library will wait for the VSCode debugger to attach before running the `flask` server
+Note: `debugpy` will wait for the VSCode debugger to attach before running the `flask` server
 
 ## 🧪 Run tests
 
