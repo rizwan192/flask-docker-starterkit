@@ -35,6 +35,9 @@ FROM base as debug
 CMD ["flask", "run", "--host", "0.0.0.0"]
 
 FROM base as test
+
+RUN pip install pytest
+
 CMD ["python","-m","pytest"]
 # Production image
 FROM base as prod
