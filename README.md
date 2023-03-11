@@ -1,9 +1,8 @@
-# flask-docker-starterkit
+# 🌶️ flask-docker-starterkit
 
 A simple starterkit providing everything you need to start a new `flask` project
 
-
-## Build the image
+## 🧰 Build the image
 
 To build the docker image, simply open a terminal and run the following command:
 
@@ -11,7 +10,7 @@ To build the docker image, simply open a terminal and run the following command:
 docker-compose build
 ```
 
-## Run the image
+## 🖥️ Run the image
 
 To run the image in a docker container, simply open a terminal and run the following command:
 
@@ -21,7 +20,15 @@ docker-compose up flaskdockerstarterkit
 
 The project will be available on the following URI: `http://127.0.0.1:5000`
 
-## Features
+## 🧪 Run tests
+
+To run the tests, please run the following command in your terminal:
+
+```bash
+docker-compose up test-runner
+```
+
+## 🗓️ Features
 
 - Up and running `flask` server
 - Containerized application
