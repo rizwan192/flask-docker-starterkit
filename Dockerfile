@@ -27,8 +27,6 @@ FROM base as debugger
 RUN pip install debugpy
 
 CMD ["python", "-m", "debugpy", "--listen", "0.0.0.0:5678", "--wait-for-client", "-m", "flask", "run", "-h","0.0.0.0" , "-p","5000"]
-# During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-# CMD ["gunicorn", "--bind", "0.0.0.0:5002", "run:app"]
 
 # Flask server in dev mode
 FROM base as debug
@@ -39,6 +37,8 @@ FROM base as test
 RUN pip install pytest
 
 CMD ["python","-m","pytest"]
+
+
 # Production image
 FROM base as prod
 
