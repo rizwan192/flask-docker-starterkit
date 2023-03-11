@@ -28,6 +28,12 @@ To run the tests, please run the following command in your terminal:
 docker-compose up test-runner
 ```
 
+## 🕵️ Environment Variables
+
+You need to have a `.env` file containing all the keys and values required.
+
+You can refer to the `.env.example` file
+
 ## 🗓️ Features
 
 - Up and running `flask` server
