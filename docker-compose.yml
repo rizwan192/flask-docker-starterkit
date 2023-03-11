@@ -10,3 +10,10 @@ services:
       - 5000:5000
     volumes:
       - .:/flask_starterkit:cached
+    env_file: .env
+  test-runner:
+    image: test-runner
+    build:
+      context: .
+      dockerfile: ./Dockerfile.test
+    env_file: .env
