@@ -11,8 +11,8 @@ def create_app():
     """
     app_instance = Flask(__name__)
     app_instance.config["YOUR_AWESOME_CONFIG_ENV"] = "your awesome non sensitive value"
-    app_instance.config["YOUR_SUPER_SECRET_VALUE"] = os.getenv(
-        "FAKE_SUPER_SECRET")
+    # app_instance.config["YOUR_SUPER_SECRET_VALUE"] = os.getenv(
+    #     "FAKE_SUPER_SECRET")
     
     app_instance.register_blueprint(auth.auth_routes, url_prefix="/api/auth")
     return app_instance
