@@ -1,8 +1,10 @@
-name: Run tests
+name: Run unit tests
 
 on:
   push:
     branches: [ main ]
+  pull_request:
+    types: [opened, reopened]
 
 jobs:
   build:
@@ -18,5 +20,4 @@ jobs:
       - name: Building containers
         run: docker-compose build
       - name: Run tests
-        run: docker-compose up --abort-on-container-exit test-runner
-      
+        run: docker-compose up  test-runner
