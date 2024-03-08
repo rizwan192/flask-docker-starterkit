@@ -41,11 +41,11 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ env.INSTANCE_IP }}
-          username: ubuntu
+          username: ec2-user
           key: |
             ${{ secrets.RSA_KEY_FOR_APP_EC2 }}
           script: |
-            docker pull rizwan192/flaskapp:latest
-            docker stop flaskapp || true
-            docker rm flaskapp || true
-            docker run -d -p 80:5000 --name flaskapp rizwan192/flaskapp:latest
+            sudo docker pull rizwan192/flaskapp:latest
+            sudo docker stop flaskapp || true
+            sudo docker rm flaskapp || true
+            sudo docker run -d -p 80:5000 --name flaskapp rizwan192/flaskapp:latest
