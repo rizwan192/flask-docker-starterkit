@@ -1,0 +1,44 @@
+name: Build and Deploy
+concurrency: production
+on:
+  push:
+    branches:
+      - main
+env:
+  PRIVATE_KEY: ${{ secrets.RSA_KEY_FOR_APP_EC2 }}
+  INSTANCE_IP: ${{ vars.INSTANCE_IP }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set permissions for private key
+        run: |
+          echo "${{ env.PRIVATE_KEY }}" > key.pem
+          chmod 600 key.pem
+      - name: Generate required .env file
+        run: |
+          echo DEBUG=True >> .env
+          echo FLASK_DEBUG=1 >> .env
+          echo FLASK_APP=run.py >> .env
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: rizwan192/flaskapp:latest
+      - name: SSH into VM and deploy Docker image
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.INSTANCE_IP }}
+          username: ubuntu
+          key: |
+            ${{ secrets.RSA_KEY_FOR_APP_EC2 }}
+          script: |
+            docker pull rizwan192/flaskapp:latest
+            docker stop flaskapp || true
+            docker rm flaskapp || true
+            docker run -d -p 80:5000 --name flaskapp rizwan192/flaskapp:latest
