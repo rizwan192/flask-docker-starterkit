@@ -6,4 +6,4 @@ flask_app = create_app()
 
 @flask_app.route("/")
 def home_route():
-    return "GitHib hook is working!"
+                return "GitHub hook is working!"

@@ -28,4 +28,4 @@ jobs:
 
     - name: Run pylint linter
       run: |
-        pylint .
+        pylint ./flask_starterkit
