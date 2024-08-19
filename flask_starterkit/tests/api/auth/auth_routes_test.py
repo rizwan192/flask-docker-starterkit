@@ -5,8 +5,8 @@ from flask_starterkit.main.config import create_app
 
 class TestAuthRoutes(unittest.TestCase):
     def setUp(self) -> None:
-            load_dotenv()
-            self.client = create_app().test_client()
+        load_dotenv()
+        self.client = create_app().test_client()
 
     def test_auth_global_endpoint(self):
         try:
