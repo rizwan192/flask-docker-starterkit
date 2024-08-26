@@ -26,6 +26,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install pylint
 
-    - name: Run pylint linter
+    - name: Get list of changed Python files
+      id: changed_files
       run: |
-        pylint ./flask_starterkit
+        git fetch origin ${{ github.base_ref }}
+        CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.head_ref }} -- '*.py')
+        echo "$FULL_PATH_FILES"
+
+    - name: Run pylint linter on changed files
+      if: success() && steps.changed_files.outputs.changed_files != ''
+      run: |
+        cd flask_starterkit
+        pylint $CHANGED_FILES
