@@ -29,9 +29,9 @@ jobs:
     - name: Get list of changed Python files
       id: changed_files
       run: |
-        git fetch origin ${{ github.base_ref }}
-        CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...${{ github.head_ref }} -- '*.py')
-        echo "$FULL_PATH_FILES"
+        git fetch origin main --depth=1
+        CHANGED_FILES=$(git diff --name-only FETCH_HEAD HEAD -- '*.py')
+        echo "$CHANGED_FILES"
 
     - name: Run pylint linter on changed files
       if: success() && steps.changed_files.outputs.changed_files != ''
