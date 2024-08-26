@@ -28,4 +28,7 @@ jobs:
 
     - name: Run pylint linter
       run: |
-        pylint ./flask_starterkit
+        git fetch origin main --depth=1
+        CHANGED_FILES=$(git diff --name-only FETCH_HEAD HEAD -- '*.py')
+        echo "$CHANGED_FILES"
+        pylint $CHANGED_FILES
