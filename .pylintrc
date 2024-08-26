@@ -1,0 +1,26 @@
+[MESSAGES CONTROL]
+# Disable the following warnings/errors:
+disable=
+    # C0114,  # Missing module docstring
+    # C0116,  # Missing function or method docstring
+    # E0401   # Unable to import (import-error)
+
+[FORMAT]
+max-line-length=100
+expected-line-ending-format=LF
+good-names-rgxs=[a-z_][a-z0-9_]{2,30}$
+single-line-if-stmt=no
+
+[DESIGN]
+max-args=6
+
+
+[NAMING]
+# Enforce naming conventions for classes, functions, and variables
+class-naming-style=PascalCase
+function-naming-style=snake_case
+variable-naming-style=snake_case
+argument-naming-style=snake_case
+attr-naming-style=snake_case
+const-naming-style=UPPER_CASE
+module-naming-style=snake_case
