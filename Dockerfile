@@ -34,13 +34,14 @@ CMD ["flask", "run", "--host", "0.0.0.0"]
 
 FROM base as test
 
-RUN pip install pytest
+# Install pytest and pytest-cov for coverage reporting
+# RUN pip install  pytest-cov
 
-CMD ["python","-m","pytest"]
+# Run pytest with coverage report generation
+CMD ["python", "-m", "pytest", "--cov=flask_starterkit", "--cov-report=term-missing"]
 
 
 # Production image
 FROM base as prod
 
 CMD ["flask", "run", "--host", "0.0.0.0"]
-
