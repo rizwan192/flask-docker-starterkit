@@ -1,14 +1,21 @@
 version: "3.4"
 
 services:
-  flaskapp:
-    image: flaskapp
+  app:
+    image: flaskdockerstarterkit
     build:
       context: .
       dockerfile: ./Dockerfile
       target: prod
     ports:
-      - 80:5000
+      - 5000:5000
     volumes:
       - .:/flask_starterkit:cached
+    env_file: .env
+  unit-test-container:
+    image: unit-test-container
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: unit_test
     env_file: .env

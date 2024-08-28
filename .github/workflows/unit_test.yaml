@@ -1,0 +1,33 @@
+name: Run unit tests
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install docker-compose
+
+      - name: Generate required .env file
+        run: |
+          echo DEBUG=True >> .env
+          echo FLASK_DEBUG=1 >> .env
+          echo FLASK_APP=run.py >> .env
+
+      - name: Building containers
+        run: docker-compose build
+
+      - name: Run tests
+        run: docker-compose up unit-test-container
