@@ -6,3 +6,5 @@ MarkupSafe==2.1.2
 python-dotenv==1.0.0
 Werkzeug==2.2.3
 pylint==3.0.3
+pytest 
+pytest-cov
