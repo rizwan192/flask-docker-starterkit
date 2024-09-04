@@ -19,3 +19,19 @@ services:
       dockerfile: ./Dockerfile
       target: unit_test
     env_file: .env
+  localdev-flaskapp:
+    image: localdev-flaskapp
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: localdev
+    environment:
+      FLASK_APP: run.py
+      FLASK_DEBUG: 1
+    command: flask run --host=0.0.0.0 --port=5000
+    ports:
+      - 5001:5000
+    volumes:
+      - .:/app
+    env_file: .env
