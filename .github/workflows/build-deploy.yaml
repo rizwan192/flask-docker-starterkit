@@ -1,0 +1,57 @@
+name: Build and Deploy
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+env:
+  PRIVATE_KEY: ${{ secrets.RSA_KEY_FOR_APP_EC2 }}
+  INSTANCE_IP: ${{ vars.INSTANCE_IP }}
+  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+  DOCKERHUB_USERNAME: rizwan192
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout to Code
+        uses: actions/checkout@v3
+
+      - name: Generate required .env file
+        run: |
+          echo FLASK_APP=run.py >> .env
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME}}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          target: production
+          push: true
+          tags: ${{ env.DOCKERHUB_USERNAME }}/flaskapp:latest
+
+      - name: Copy docker-compose and nginx files to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ env.INSTANCE_IP }}
+          username: ec2-user
+          key: ${{ secrets.RSA_KEY_FOR_APP_EC2 }}
+          source: "docker-compose.production.yaml,nginx.conf"
+          target: "~/"
+
+      - name: SSH into VM and deploy Docker image
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ env.INSTANCE_IP }}
+          username: ec2-user
+          key: ${{ secrets.RSA_KEY_FOR_APP_EC2 }}
+          script: |
+            docker-compose -f docker-compose.production.yaml  up -d
+            docker image prune -f

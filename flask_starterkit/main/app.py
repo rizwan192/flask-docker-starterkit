@@ -4,6 +4,8 @@ from flask_starterkit.main.config import create_app
 flask_app = create_app()
 
 
-@flask_app.route("/")
+@flask_app.route("/_status")
 def home_route():
-    return "GitHub hook is working!"
+    return {
+        "status":  "Ok..."
+    }

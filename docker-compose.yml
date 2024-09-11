@@ -2,16 +2,17 @@ version: "3.4"
 
 services:
   app:
-    image: flaskdockerstarterkit
+    image: flaskapp
     build:
       context: .
       dockerfile: ./Dockerfile
-      target: prod
+      target: production
     ports:
       - 5000:5000
-    volumes:
-      - .:/flask_starterkit:cached
-    env_file: .env
+    environment:
+      FLASK_APP: run.py
+      FLASK_DEBUG: 1
+
   unit-test-container:
     image: unit-test-container
     build:
@@ -19,3 +20,20 @@ services:
       dockerfile: ./Dockerfile
       target: unit_test
     env_file: .env
+
+  localdev-flaskapp:
+    image: localdev-flaskapp
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: localdev
+    env_file: .env
+    environment:
+      FLASK_APP: run.py
+      FLASK_DEBUG: 1
+    ports:
+      - 5001:5000
+    volumes:
+      - .:/app
+    command: flask run --host=0.0.0.0 --port=5000
