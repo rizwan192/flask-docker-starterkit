@@ -1,9 +1,9 @@
 name: Build and Deploy
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
+#   push:
+#     branches:
+#       - main
 env:
   PRIVATE_KEY: ${{ secrets.RSA_KEY_FOR_APP_EC2 }}
   INSTANCE_IP: ${{ vars.INSTANCE_IP }}

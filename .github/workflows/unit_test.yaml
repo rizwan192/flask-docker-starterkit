@@ -2,10 +2,11 @@ name: Run unit tests
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ main ]
-  pull_request:
-    types: [opened, reopened]
+  
+  # push:
+  #   branches: [ main ]
+  # pull_request:
+  #   types: [opened, reopened]
 
 jobs:
   build:
